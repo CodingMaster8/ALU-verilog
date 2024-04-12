@@ -75,6 +75,16 @@ module test_bench;
       // PCNext = 32'h00000008;
       // PCWrite = 1;
       // #10 PCWrite = 0;
+		
+		#200
+		#150
+		
+		// Test scenario 4: Write a new PC value
+		PCNext = 5'b11110;
+      PCWrite = 1;
+      #10 PCWrite = 0;
+		
+		#100
 
       // End simulation
       #10 $finish;

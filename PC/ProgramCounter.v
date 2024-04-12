@@ -29,10 +29,11 @@ module ProgramCounter(
 	input       [4:0]  PCNext,
 	input               Reset, Clk,PCWrite,
 
-	output reg  [4:0]  PCResult
+	output reg  [4:0]  PCResult,
+	output reg	[4:0]  TempPCResult
 );
 
-	reg	[4:0]  TempPCResult;
+	
 
     /* Please fill in the implementation here... */
 
@@ -42,25 +43,23 @@ module ProgramCounter(
 		TempPCResult <= 5'b00000;
 	end
 
-    always @(posedge Clk)
-    begin
-    	if (Reset == 1)
-    	begin
-    		PCResult <= 5'b00000;
-			TempPCResult <= 5'b00000;
-    	end
-    	else
-    	begin
-			if (PCWrite == 0)
-			begin
-				PCResult = TempPCResult; // Restaurar el valor de PCResult
-				TempPCResult = PCResult + 1; // Guardar el nuevo valor de PCResult en TempPCResult
-			end
-			else
-			begin
-				PCResult = PCNext;
-		end
-    	end
+    always @(posedge Clk) begin
+    if (Reset == 1) begin
+        PCResult <= 5'b00000;
+        TempPCResult <= 5'b00000;
+    end else begin
+        if (PCWrite == 0) begin
+            if (PCResult == 5'b11111) begin
+                PCResult <= 5'b00000;
+                TempPCResult <= 5'b00000;
+            end else begin
+                PCResult = TempPCResult; // Restaurar el valor de PCResult
+                TempPCResult = PCResult + 1; // Guardar el nuevo valor de PCResult en TempPCResult
+            end
+        end else begin
+            PCResult = PCNext;
+        end
     end
+end
 
 endmodule
