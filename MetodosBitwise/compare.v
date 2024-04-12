@@ -3,15 +3,12 @@ module compare(
 	input [31:0] i_bit1,
 	input [31:0] i_bit2,
 
-	
 	input c_in,
 	
 	output [1:0] n,
 	output [1:0] z,
 	output [1:0] c,
-	output [1:0] v,
-	
-	reg carry,
+	output [1:0] v
 
 )
 	
@@ -22,6 +19,7 @@ module compare(
 	
 	wire [31:0] w_VECTOR;
 	wire [31:0] xor_outputs;
+	wire [1:0] carry;
 	
 	
 	
@@ -74,13 +72,9 @@ module compare(
 		assign n = 1;
 	end
 	
+	
 endmodule
 	
-	
-	
-		
-		
-		
-endmodule
+
 		
 
