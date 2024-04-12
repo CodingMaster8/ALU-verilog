@@ -14,7 +14,7 @@ module compare(
 	input i_bit2;
 	output o_bit;
 	
-	assign w_VECTOR = i_bit1 & i_bit2;
+	assign w_VECTOR = i_bit1 ~^ i_bit2;
 	
 	initial begin
 		if (w_VECTOR == 32b'11111111111111111111111111111111) begin
