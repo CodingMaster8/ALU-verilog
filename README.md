@@ -4,8 +4,8 @@ Implementación de la arquitectura del microprocesador ARM Cortex-M0 en una FPGA
 - Memoria RAM (32 bits)
 
 Operaciones:
-- ADCS
 - ADD
+- ADCS
 - ANDS
 - CMP
 - EORS
