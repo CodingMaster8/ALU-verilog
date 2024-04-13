@@ -3,7 +3,7 @@ module ADD_ADCS_SUBS(
 	input	c_in,
 	input op,
 	output [31:0] s, 
-	output c_out
+	output wire c_out
 );
 
 wire [30:0] w_c_out;
