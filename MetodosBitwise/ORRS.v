@@ -1,11 +1,9 @@
 module ORRS(
-	input [31:0] i_bit1,
-	input [31:0] i_bit2,
+	input [31:0] a,
+	input [31:0] b,
+	output [31:0] o
+);
+
+assign o = a | b;
 	
-	output [31:0] o_bit
-	
-)
-	
-	assign o_bit = i_bit1 | i_bit2;
-	
-endmodule
+endmodule 
