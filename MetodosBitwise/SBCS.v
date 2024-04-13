@@ -1,7 +1,7 @@
 module SBCS(
 	input [31:0] a, b,
 	output [31:0] s,
-	output c_out
+	output wire c_out
 );
 
 wire [31:0] w_s;
