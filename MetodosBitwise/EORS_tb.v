@@ -5,11 +5,13 @@ reg [31:0] b;
 wire [31:0] o;
 wire n, z;
 
-// Instancia para la cama de pruebas 
+// Instancia de la cama de pruebas 
 EORS DUT(
 .a(a),
 .b(b),
-.o(o)
+.o(o),
+.n(n),
+.z(z)
 );
 
 // Estimulos
