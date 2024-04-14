@@ -1,4 +1,4 @@
-odule SBCS(
+module SBCS(
 	input [31:0] a, b,
 	output [31:0] s,
 	output c_out,
