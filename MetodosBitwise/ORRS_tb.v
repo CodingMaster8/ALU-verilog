@@ -3,13 +3,18 @@ module ORRS_tb();
 reg [31:0] a;
 reg [31:0] b;
 wire [31:0] o;
+wire n, z;
 
+// Instancia de la cama de pruebas
 ORRS DUT(
 .a(a),
 .b(b),
-.o(o)
+.o(o),
+.n(n),
+.z(z)
 );
 
+// Estimulos
 initial
 begin
 	a = 39718;
