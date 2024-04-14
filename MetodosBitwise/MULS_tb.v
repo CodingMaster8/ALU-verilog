@@ -4,6 +4,7 @@ reg [31:0] a, b;
 wire [31:0] m;
 wire n, z;
 
+// Instancia para la cama de pruebas
 MULS DUT(
 .a(a),
 .b(b),
@@ -12,6 +13,7 @@ MULS DUT(
 .z(z)
 );
 
+// Estimulos 
 initial
 begin
 	a = 15;
