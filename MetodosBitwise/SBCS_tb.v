@@ -1,25 +1,23 @@
-module ADD_tb();
+module SBCS_tb();
 
 reg [31:0] a, b;
-reg c_in;
 wire [31:0] s;
 wire c_out;
 
-ADD DUT(
+SBCS s0(
 .a(a),
 .b(b),
-.c_in(c_in),
 .s(s),
 .c_out(c_out)
 );
 
 initial
 begin
-	a = 32'd53;
-	b = 32'd17;
-	c_in = 0;
+	a = 13409;
+	b = 713;
 	#10
-	c_in = 1;
+	a = 4576;
+	b = 259;
 	#10
 	$stop;
 end
