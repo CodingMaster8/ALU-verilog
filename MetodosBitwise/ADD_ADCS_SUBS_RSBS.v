@@ -26,6 +26,6 @@ generate
   end
 endgenerate
 
-fulladder fa(.a(w_a[31]),.b(w_b[31]),.c_in(w_c_out[30]),.s(s[31]),.c_out(c_out));
+fulladder fa1(.a(w_a[31]),.b(w_b[31]),.c_in(w_c_out[30]),.s(s[31]),.c_out(c_out));
 
 endmodule 
