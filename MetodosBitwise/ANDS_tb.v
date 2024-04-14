@@ -4,12 +4,14 @@ reg [31:0] a;
 reg [31:0] b;
 wire [31:0] o;
 
+// Instancia para la cama de pruebas 	
 ANDS DUT(
 .a(a),
 .b(b),
 .o(o)
 );
 
+// Estimulos
 initial
 begin
 	a = 39718;
