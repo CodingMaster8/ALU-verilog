@@ -3,6 +3,7 @@ module ANDS_tb();
 reg [31:0] a;
 reg [31:0] b;
 wire [31:0] o;
+wire n, z;
 
 // Instancia para la cama de pruebas 	
 ANDS DUT(
