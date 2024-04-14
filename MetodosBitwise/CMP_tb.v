@@ -6,6 +6,7 @@ wire z;
 wire c;
 wire v;
 
+// Instancia de la cama de pruebas
 CMP DUT(
 .a(a),
 .b(b),
@@ -15,6 +16,7 @@ CMP DUT(
 .v(v)
 );
 
+// Estimulos
 initial
 begin
 	a = 32'h8_0_0_0_0_0_0_0;
