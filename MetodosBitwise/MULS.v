@@ -4,6 +4,7 @@ module MULS(
 	output n, z
 );
 
+// Variables necesarias para implementar el algoritmo de booth
 wire [31:0] A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15,
 				A16, A17, A18, A19, A20, A21, A22, A23, A24, A25, A26, A27, A28, A29, A30, A31;
 wire [31:0] Q0, Q1, Q2, Q3, Q4, Q5, Q6, Q7, Q8, Q9, Q10, Q11, Q12, Q13, Q14, Q15,
@@ -11,6 +12,7 @@ wire [31:0] Q0, Q1, Q2, Q3, Q4, Q5, Q6, Q7, Q8, Q9, Q10, Q11, Q12, Q13, Q14, Q15
 wire [31:0] q;
 wire [63:0] final_m;
 
+// Instanciacion de las 32 iteraciones del algoritmo de booth
 booths bth0(.i_A(32'h00000000), .i_Q(a), .i_q1(1'b0), .i_m(b), .o_A(A0), .o_Q(Q0), .o_q1(q[0]));
 booths bth1(.i_A(A0), .i_Q(Q0), .i_q1(q[0]), .i_m(b), .o_A(A1), .o_Q(Q1), .o_q1(q[1]));
 booths bth2(.i_A(A1), .i_Q(Q1), .i_q1(q[1]), .i_m(b), .o_A(A2), .o_Q(Q2), .o_q1(q[2]));
@@ -47,10 +49,12 @@ booths bth29(.i_A(A28), .i_Q(Q28), .i_q1(q[28]), .i_m(b), .o_A(A29), .o_Q(Q29), 
 booths bth30(.i_A(A29), .i_Q(Q29), .i_q1(q[29]), .i_m(b), .o_A(A30), .o_Q(Q30), .o_q1(q[30]));
 booths bth31(.i_A(A30), .i_Q(Q30), .i_q1(q[30]), .i_m(b), .o_A(A31), .o_Q(Q31), .o_q1(q[31]));
 
+// Resultados asignados
 assign final_m[31:0] = Q31;
 assign final_m[63:32] = A31;
 assign m = Q31;
 
+// Actualizacion de banderas
 assign n = m[31];
 assign z = ~(m[0] | m[1] | m[2] | m[3] | m[4] | m[5] | m[6] | m[7] | m[8] | m[9] | m[10] | m[11] | m[12] | m[13] | m[14] | m[15] | m[16] | m[17] | m[18] | m[19] | m[20] | m[21] | m[22] | m[23] | m[24] | m[25] | m[26] | m[27] | m[28] | m[29] | m[30] | m[31]);
 
