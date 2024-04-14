@@ -1,7 +1,7 @@
 module EORS(
 	input [31:0] a,
 	input [31:0] b,
-	output [31:0] o
+	output [31:0] o,
 	output n, z
 );
 
