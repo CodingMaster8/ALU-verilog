@@ -31,62 +31,54 @@ module test_bench;
 		#(CLK_PERIOD/2) Clk = ~Clk; // Invertir la señal de reloj cada medio periodo
    end
 
-	// Inicialización de las señales
 	initial
 	begin
-	// Initialize inputs
+	// Inicialización de las señales
 		Reset = 1;
       Clk = 0;
       PCWrite = 0;
       PCNext = 5'b00000;
 
-      // Wait for a few clock cycles after Reset
+      // Esperar algunos ciclos tras el Reset
       #10 Reset = 0;
-		
 		#10
 		#10
 
-		
-
-      // Test scenario 2: Write a new PC value
+      // Escenario 1: Escribir un nuevo valor a PC
       PCNext = 5'b00100;
       PCWrite = 1;
       #10 PCWrite = 0;
 		
-		// Test scenario 3: Just wait
+		// Escenario 2: Esperar
 		#10
 		#10
 		
-		// Test scenario 4: Write a new PC value
+		// Escenario 3: Escribir un nuevo valor a PC
 		PCNext = 5'b01100;
       PCWrite = 1;
       #10 PCWrite = 0;
 		
-		// Test scenario 5: Keep waiting
+		// Escenario 4: Seguir esperando
 		#10
 		#10
 		
-		// Test scenario 1: Reset
+		// Escenario 5: Aplicar un Reset
       #10 Reset = 0;
       #10 Reset = 0;
-
-      // Add more test scenarios as needed
-      // Example: Write another PC value
-      // PCNext = 32'h00000008;
-      // PCWrite = 1;
-      // #10 PCWrite = 0;
 		
+		// Escenario 6: Esperar hasta que PC se llene
 		#200
 		#150
 		
-		// Test scenario 4: Write a new PC value
+		// Escenario 7: Escribir un nuevo valor a PC
 		PCNext = 5'b11110;
       PCWrite = 1;
       #10 PCWrite = 0;
 		
+		// Escenario 8: Seguir esperando
 		#100
 
-      // End simulation
+      // Terminar la simulación
       #10 $finish;
 	end
 		

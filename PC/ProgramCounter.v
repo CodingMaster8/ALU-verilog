@@ -1,65 +1,69 @@
-////////////////////////////////////////////////////////////////////////////////
-// ECE369 - Computer Architecture
-// Laboratory 3 (PreLab)
-// Module - pc_register.v
-// Description - 32-Bit program counter (PC) register.
+//-------------------------------------------------------------------------------------//
+// Este programa se encuentra basado en el siguiente programa:
+// https://github.com/Caskman/MIPS-Processor-in-Verilog/blob/master/ProgramCounter.v
+// Creado por Eric Cascketta
 //
-// INPUTS:-
-// Address: 32-Bit address input port.
-// Reset: 1-Bit input control signal.
-// Clk: 1-Bit input clock signal.
+// El programa consiste en un contador que comienza en 0 y aumenta de uno en uno
+// para indicar una dirección de memoria hasta alcanzar un máximo de 31. Este
+// funcionamiento normal se puede ver interrumpido por PCWrite, que es una entrada
+// binaria que decide si el PC se establecerá en una dirección deseada externa
+// (PCNext) para que, una vez indicada, el PC volverá a los valores que estaba contando.
 //
-// OUTPUTS:-
-// PCResult: 32-Bit registered output port.
+// El programa se reinicia de 2 maneras:
+// - Al activar el Reset
+// - Al alcanzar el contador máximo
 //
-// FUNCTIONALITY:-
-// Design a program counter register that holds the current address of the 
-// instruction memory.  This module should be updated at the positive edge of 
-// the clock. The contents of a register default to unknown values or 'X' upon 
-// instantiation in your module. Hence, please add a synchronous 'Reset' 
-// signal to your PC register to enable global reset of your datapath to point 
-// to the first instruction in your instruction memory (i.e., the first address 
-// location, 0x00000000H).
-////////////////////////////////////////////////////////////////////////////////
-
-// Vamos a modificar el programa suponiendo que tenemos 31 registros
+//-------------------------------------------------------------------------------------//
 
 module ProgramCounter(
 
-	input       [4:0]  PCNext,
-	input               Reset, Clk,PCWrite,
+	input       [4:0]  PCNext, // Entrada que indica el próximo valor del PC
+	input              Reset, 	// Entrada de reinicio que setea el PC a 0
+							 Clk, // Entrada de reloj
+							 PCWrite, // Entrada que controla si se debe escribir en el PC
 
-	output reg  [4:0]  PCResult,
-	output reg	[4:0]  TempPCResult
+	output reg  [4:0]  PCResult, // Salida que indica el valor del PC
+	output reg	[4:0]  TempPCResult // Almacena el valor del PC para volver al contador normal
 );
 
-	
-
-    /* Please fill in the implementation here... */
-
+	// Al iniciar, tanto PCResult como TempPCResult se inicializan en 0
 	initial begin
-	
 		PCResult <= 5'b00000;
 		TempPCResult <= 5'b00000;
 	end
-
-    always @(posedge Clk) begin
-    if (Reset == 1) begin
-        PCResult <= 5'b00000;
-        TempPCResult <= 5'b00000;
-    end else begin
-        if (PCWrite == 0) begin
-            if (PCResult == 5'b11111) begin
-                PCResult <= 5'b00000;
-                TempPCResult <= 5'b00000;
-            end else begin
-                PCResult = TempPCResult; // Restaurar el valor de PCResult
-                TempPCResult = PCResult + 1; // Guardar el nuevo valor de PCResult en TempPCResult
-            end
-        end else begin
-            PCResult = PCNext;
-        end
-    end
+	 
+	// Se utiliza el flanco positivo del clk para actualizar el PC
+	always @(posedge Clk) begin
+	// Al activarse el reset, el programa setea tanto el PCResult como en TempPCResult a 0
+   if (Reset == 1) begin
+		PCResult <= 5'b00000;
+      TempPCResult <= 5'b00000;
+   end
+	else
+	begin
+		// Mientras esté deshabilitado el PCWrite el PC solo será un contador
+      if (PCWrite == 0)
+		begin
+			// Una vez alcanzado el PCResult máximo, ambos contadores se reinician
+			if (PCResult == 5'b11111)
+			begin
+				PCResult <= 5'b00000;
+            TempPCResult <= 5'b00000;
+         end
+			else
+			begin
+				// TempPCResult sirve para restaurar el valor del PC al volver de una escritura
+            PCResult = TempPCResult; // Restaurar el valor de PCResult
+            TempPCResult = PCResult + 1; // Guardar el nuevo valor de PCResult en TempPCResult
+													  // a la vez que aumenta el contador
+         end
+      end
+		else
+		begin
+			// PCResult toma el valor de PCNext al habilitarse PCWrite
+			PCResult = PCNext;
+      end
+   end
 end
 
 endmodule
