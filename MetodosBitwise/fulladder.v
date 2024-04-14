@@ -7,7 +7,7 @@ module fulladder(
 );
 
 
-assign s = a ^ b ^ c_in;							// Calculo de la suma de 2 bits
+assign s = a ^ b ^ c_in;			// Calculo de la suma de 2 bits
 assign c_out = (a & b) | ((a ^ b) & c_in);	// Calculo acarreo de 2 bits
 
 endmodule 
