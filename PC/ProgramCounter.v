@@ -17,27 +17,27 @@
 
 module ProgramCounter(
 
-	input       [4:0]  PCNext, // Entrada que indica el próximo valor del PC
+	input       [6:0]  PCNext, // Entrada que indica el próximo valor del PC
 	input              Reset, 	// Entrada de reinicio que setea el PC a 0
 							 Clk, // Entrada de reloj
 							 PCWrite, // Entrada que controla si se debe escribir en el PC
 
-	output reg  [4:0]  PCResult, // Salida que indica el valor del PC
-	output reg	[4:0]  TempPCResult // Almacena el valor del PC para volver al contador normal
+	output reg  [6:0]  PCResult, // Salida que indica el valor del PC
+	output reg	[6:0]  TempPCResult // Almacena el valor del PC para volver al contador normal
 );
 
 	// Al iniciar, tanto PCResult como TempPCResult se inicializan en 0
 	initial begin
-		PCResult <= 5'b00000;
-		TempPCResult <= 5'b00000;
+		PCResult <= 6'b000000;
+		TempPCResult <= 6'b000000;
 	end
 	 
 	// Se utiliza el flanco positivo del clk para actualizar el PC
 	always @(posedge Clk) begin
 	// Al activarse el reset, el programa setea tanto el PCResult como en TempPCResult a 0
    if (Reset == 1) begin
-		PCResult <= 5'b00000;
-      TempPCResult <= 5'b00000;
+		PCResult <= 6'b000000;
+      TempPCResult <= 6'b000000;
    end
 	else
 	begin
@@ -45,10 +45,10 @@ module ProgramCounter(
       if (PCWrite == 0)
 		begin
 			// Una vez alcanzado el PCResult máximo, ambos contadores se reinician
-			if (PCResult == 5'b11111)
+			if (PCResult == 6'b111111)
 			begin
-				PCResult <= 5'b00000;
-            TempPCResult <= 5'b00000;
+				PCResult <= 6'b000000;
+            TempPCResult <= 6'b000000;
          end
 			else
 			begin
